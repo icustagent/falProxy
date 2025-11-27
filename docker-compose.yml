@@ -1,0 +1,22 @@
+services:
+  falproxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: falproxy
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./.env:/app/.env:ro
+    networks:
+      - falproxy
+      - apinetwork
+
+networks:
+  falproxy:
+    name: falproxy
+  apinetwork:
+    name: apinetwork
